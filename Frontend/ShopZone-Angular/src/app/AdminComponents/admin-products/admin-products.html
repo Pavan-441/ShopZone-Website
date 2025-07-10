@@ -1,0 +1,65 @@
+<div class="admin-dashboard-container">
+  <header class="admin-header">
+    <h1>Manage Products</h1>
+    <nav class="admin-nav">
+      <a routerLink="/admin-home" class="nav-button">Dashboard</a>
+      <button (click)="logoutAdmin()" class="logout-button">Logout</button>
+    </nav>
+  </header>
+
+  <div class="admin-content">
+    <div *ngIf="message" [ngClass]="{'message': true, 'success-message': messageType === 'success', 'error-message': messageType === 'error'}">
+      {{ message }}
+    </div>
+
+    <div class="product-form-section">
+      <h2>{{ isEditing ? 'Edit Product' : 'Add New Product' }}</h2>
+      <form (ngSubmit)="submitProductForm()" class="product-form">
+        <div class="form-group">
+          <label for="name">Product Name:</label>
+          <input type="text" id="name" [(ngModel)]="productForm.name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea id="description" [(ngModel)]="productForm.description" name="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">Price (₹):</label>
+          <input type="number" id="price" [(ngModel)]="productForm.price" name="price" required min="0">
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Image URL:</label>
+          <input type="text" id="imageUrl" [(ngModel)]="productForm.imageUrl" name="imageUrl">
+        </div>
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <input type="text" id="category" [(ngModel)]="productForm.category" name="category">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="submit-button">{{ isEditing ? 'Update Product' : 'Add Product' }}</button>
+          <button type="button" class="reset-button" (click)="resetForm()">{{ isEditing ? 'Cancel Edit' : 'Clear Form' }}</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="product-list-section">
+      <h2>Existing Products</h2>
+      <div *ngIf="products.length === 0" class="no-data-message">No products found.</div>
+      <div class="product-cards-grid" *ngIf="products.length > 0">
+        <div class="product-admin-card" *ngFor="let product of products">
+          <img [src]="product.imageUrl || '[https://placehold.co/100x100/cccccc/333333?text=No+Image](https://placehold.co/100x100/cccccc/333333?text=No+Image)'" alt="{{ product.name }}">
+          <div class="card-details">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <strong>₹{{ product.price | number:'1.2-2' }}</strong>
+            <p class="category">Category: {{ product.category }}</p>
+          </div>
+          <div class="card-actions">
+            <button class="edit-button" (click)="editProduct(product)">Edit</button>
+            <button class="delete-button" (click)="deleteProduct(product.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

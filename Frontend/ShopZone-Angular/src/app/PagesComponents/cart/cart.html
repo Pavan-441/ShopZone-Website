@@ -1,0 +1,89 @@
+<!-- <app-navbar></app-navbar> -->
+
+<!-- <div class="cart-container">
+  <h2>Your Cart</h2>
+
+  <div *ngIf="cartItems.length === 0">Your cart is empty.</div>
+
+  <div *ngFor="let item of cartItems" class="cart-item">
+    <img [src]="item.products.imageUrl" alt="Product image" />
+    <div class="cart-details">
+      <h4>{{ item.products.name }}</h4>
+      <p>₹{{ item.products.price }} × {{ item.quantity }} = ₹{{ item.products.price * item.quantity }}</p>
+
+      <div class="quantity-controls">
+        <button (click)="decreaseQuantity(item)">−</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="increaseQuantity(item)">+</button>
+      </div>
+
+      <button class="remove-btn" (click)="removeItem(item.id)">Remove</button>
+    </div>
+  </div>
+
+  <h3 *ngIf="cartItems.length > 0">Total: ₹{{ totalPrice }}</h3>
+  <button *ngIf="cartItems.length > 0" class="checkout-btn" (click)="checkout()">Place Order</button>
+</div>
+
+<app-footer></app-footer> -->
+
+
+<app-navbar></app-navbar>
+
+<div class="cart-page-container">
+  <h2>Your Shopping Cart</h2>
+
+  <div *ngIf="message" [ngClass]="{'message': true, 'success-message': messageType === 'success', 'error-message': messageType === 'error', 'info-message': messageType === 'info'}">
+    {{ message }}
+  </div>
+
+  <div class="cart-content-wrapper">
+    <div class="cart-items-list">
+      <div *ngIf="cartItems.length === 0" class="empty-cart-message">
+        <i class="fas fa-shopping-cart"></i>
+        <p>Your cart is empty. Start shopping now!</p>
+        <button class="primary-button"><a routerLink="/products">Continue Shopping</a></button>
+      </div>
+
+      <div *ngFor="let item of cartItems" class="cart-item-card">
+        <div class="item-image">
+          <img [src]="item.products.imageUrl || '[https://placehold.co/100x100/cccccc/333333?text=No+Image](https://placehold.co/100x100/cccccc/333333?text=No+Image)'" alt="Product image" />
+        </div>
+        <div class="item-details">
+          <h4 class="item-name">{{ item.products.name }}</h4>
+          <p class="item-price">Unit Price: ₹{{ item.products.price | number:'1.2-2' }}</p>
+          <div class="quantity-controls">
+            <button (click)="decreaseQuantity(item)" class="quantity-button">-</button>
+            <span class="item-quantity">{{ item.quantity }}</span>
+            <button (click)="increaseQuantity(item)" class="quantity-button">+</button>
+          </div>
+          <p class="item-subtotal">Subtotal: <strong>₹{{ (item.products.price * item.quantity) | number:'1.2-2' }}</strong></p>
+        </div>
+        <button class="remove-item-button" (click)="removeItem(item.id)">
+          <i class="fas fa-trash-alt"></i> Remove
+        </button>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+      <div class="summary-line">
+        <span>Items Total:</span>
+        <span>₹{{ totalPrice | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-line">
+        <span>Shipping:</span>
+        <span>Free</span> <!-- Placeholder for shipping -->
+      </div>
+      <div class="summary-total">
+        <span>Total:</span>
+        <span>₹{{ totalPrice | number:'1.2-2' }}</span>
+      </div>
+      <button class="checkout-button" (click)="checkout()" [disabled]="cartItems.length === 0">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

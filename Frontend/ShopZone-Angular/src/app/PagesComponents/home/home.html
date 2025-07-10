@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<section class="banner">
+  <h1>Friendly Neighborhood Kirana Store</h1>
+  <p>Everyday essentials delivered at your doorstep.</p>
+  <button><a routerLink="/products">Explore products</a></button>
+</section>
+
+<section class="scroll-products">
+  <h2>🔥Trending Products</h2>
+  <div class="scroll-container">
+    <div class="scroll-track">
+      <img src="assets/dabur.jpg" alt="Paste" />
+      <img src="assets/Cococola.jpg" alt="Soap" />
+      <img src="assets/diarymilk.jpg" alt="Snacks" />
+      <img src="assets/oreo.jpg" alt="Britannia" />
+      <img src="assets/ChocoPie.jpg" alt="Choco pie" />
+      <img src="assets/TajMahal.jpg" alt="Taj Mahal Tea Powder" />
+      <img src="assets/RedBull.jpg" alt="Red Bull" />
+      <img src="assets/Bingo.jpg" alt="Bingo" />
+      <img src="assets/Rasna.jpg" alt="Snacks" />
+
+      <!-- Repeat once for smooth infinite scroll -->
+      <img src="assets/dabur.jpg" alt="Paste" />
+      <img src="assets/Cococola.jpg" alt="Soap" />
+      <img src="assets/diarymilk.jpg" alt="Snacks" />
+      <img src="assets/oreo.jpg" alt="Britannia" />
+      <img src="assets/ChocoPie.jpg" alt="Choco pie" />
+      <img src="assets/TajMahal.jpg" alt="Taj Mahal Tea Powder" />
+      <img src="assets/RedBull.jpg" alt="Red Bull" />
+      <img src="assets/Bingo.jpg" alt="Bingo" />
+      <img src="assets/Rasna.jpg" alt="Snacks" />
+    </div>
+  </div>
+</section>
+
+
+<app-footer></app-footer>
+
+<!-- for taking pictures from backend -->
+<!-- <section class="scroll-products">
+  <h2>Trending Products</h2>
+  <div class="scroll-container">
+    <img *ngFor="let product of products" [src]="'http://localhost:8080' + product.imageUrl" [alt]="product.name" />
+  </div>
+</section> -->

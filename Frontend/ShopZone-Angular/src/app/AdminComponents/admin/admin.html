@@ -1,0 +1,26 @@
+<div class="auth-container">
+  <div class="auth-box">
+    <h2>Admin Login to ShopZone</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input type="email" formControlName="email" placeholder="Email Address" required />
+      <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="validation-error">
+        <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</span>
+        <span *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</span>
+      </div>
+      
+      <input type="password" formControlName="password" placeholder="Password" required />
+      <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="validation-error">
+        <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</span>
+      </div>
+      
+      <button type="submit">Login</button>
+      <p *ngIf="message" [ngClass]="{'message': true, 'success-message': messageType === 'success', 'error-message': messageType === 'error'}">{{ message }}</p>
+
+      <p>
+        User?
+        <a routerLink="/login">Click here for User Login</a>
+      </p>
+    </form>
+  </div>
+  <div class="auth-image admin-image"></div>
+</div>

@@ -1,0 +1,25 @@
+<div class="admin-dashboard-container">
+  <header class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <nav class="admin-nav">
+      <a routerLink="/admin-products" class="nav-button">Manage Products</a>
+      <button (click)="logoutAdmin()" class="logout-button">Logout</button>
+    </nav>
+  </header>
+
+  <div class="admin-content">
+    <div *ngIf="message" [ngClass]="{'message': true, 'success-message': messageType === 'success', 'error-message': messageType === 'error'}">
+      {{ message }}
+    </div>
+
+    <h2>User List</h2>
+    <div *ngIf="users.length === 0" class="no-data-message">No users found.</div>
+    <div class="user-list-cards" *ngIf="users.length > 0">
+      <div class="user-card" *ngFor="let user of users">
+        <h3>{{ user.name }}</h3>
+        <p><strong>ID:</strong> {{ user.id }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+</div>

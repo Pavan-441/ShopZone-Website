@@ -1,0 +1,119 @@
+
+.navbar {
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1.5rem; 
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+
+.logo img {
+  width: 40px;        
+  height: 40px;
+  object-fit: cover;
+  border-radius: 28% 3%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.nav-links li a {
+  position: relative;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+.nav-links li a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 50px;
+}
+
+.auth-btn {
+  background: white;
+  color: #4facfe;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.auth-btn.login {
+  background: white;
+  color: #00c6ff;
+}
+.auth-btn.signup {
+  background: white;
+  color: #00c6ff;
+}
+
+.auth-btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Remove underline from all links inside buttons */
+.auth-btn a {
+  text-decoration: none;
+  color: inherit;
+}

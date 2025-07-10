@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="logo">
+    <a routerLink=""><img [src]="logoPath" alt="ShopZone Logo" /></a>
+    <span>ShopZone</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/products">Products</a></li>
+    <li><a routerLink="/cart">Cart</a></li>
+    <li><a routerLink="/contact">Contact</a></li>
+  </ul>
+  <div *ngIf="!isLoggedIn">
+    <div class="auth-buttons">
+      <button class="auth-btn"><a routerLink="/login">Login</a></button>
+      <button class="auth-btn signup"><a routerLink="/signup">Signup</a></button>
+    </div>
+  </div>
+  <div *ngIf="isLoggedIn">
+    <button class="auth-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>

@@ -1,0 +1,21 @@
+<div class="auth-container">
+  <div class="auth-image register-image"></div>
+  <div class="auth-box">
+    <h2>Register for ShopZone</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <input type="text" formControlName="name" placeholder="User Name" required />
+      <input type="email" formControlName="email" placeholder="Email Address" required />
+      <input type="password" formControlName="password" placeholder="Password" required />
+
+      <button type="submit" (click)="registered()">Register</button>
+
+      <p *ngIf="successMessage" style="color: green;">{{ successMessage }}</p>
+      <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
+      <p>
+        Already have an account?
+        <a routerLink="/login">Login here</a>
+      </p>
+    </form>
+  </div>
+</div>

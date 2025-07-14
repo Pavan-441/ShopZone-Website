@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -21,8 +21,7 @@ export class AdminHome implements OnInit {
   private usersDataSubscription: Subscription | undefined;
 
 
-  constructor(private http: HttpClient, private router: Router, private dataService: DataService) {
-    // Listen for route changes to reload data
+  constructor(private http: HttpClient, private router: Router, private dataService: DataService, private cdr: ChangeDetectorRef) {
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd && event.urlAfterRedirects === '/admin-home')
     ).subscribe(() => {
@@ -39,7 +38,7 @@ export class AdminHome implements OnInit {
   ngOnDestroy(): void {
     console.log('AdminHomeComponent: ngOnDestroy called. Unsubscribing from subscriptions.');
     this.routerSubscription?.unsubscribe();
-    this.usersDataSubscription?.unsubscribe(); // Ensure users data subscription is also unsubscribed
+    this.usersDataSubscription?.unsubscribe(); 
   }
 
   checkAdminLoginAndLoadUsers(): void {
@@ -62,6 +61,7 @@ export class AdminHome implements OnInit {
       next: (data: any[]) => {
         console.log("Fetched users successfully:", data);
         this.users = data;
+        this.cdr.detectChanges();
         this.clearMessage();
         if (this.users.length === 0) {
           this.showMessage("No users found in the database.", 'info');

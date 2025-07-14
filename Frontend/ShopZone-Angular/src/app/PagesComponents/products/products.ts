@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'; // Added OnDestroy
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core'; 
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { Navbar } from '../../ReusableComponents/navbar/navbar';
 import { Footer } from '../../ReusableComponents/footer/footer';
@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { DataService } from '../../data-service';
 import { HttpClient } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
-import { Subscription } from 'rxjs'; // Import Subscription
+import { Subscription } from 'rxjs'; 
 
 @Component({
   standalone: true,
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs'; // Import Subscription
   templateUrl: './products.html',
   styleUrl: './products.css'
 })
-export class Products implements OnInit, OnDestroy { // Implemented OnDestroy
+export class Products implements OnInit, OnDestroy { 
 
   products: any[] = [];
   filteredProductsList: any[] = [];
@@ -28,23 +28,24 @@ export class Products implements OnInit, OnDestroy { // Implemented OnDestroy
   messageType: 'success' | 'error' | 'info' | '' = '';
   private routerSubscription: Subscription | undefined;
 
-  constructor(private http: HttpClient, private dataService: DataService, private router: Router) {
-    // Subscribe to router events to reload products when navigating to this page
-    this.routerSubscription = this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd && event.urlAfterRedirects.startsWith('/products'))
-    ).subscribe(() => {
-      console.log('ProductsComponent: NavigationEnd event detected. Reloading products...');
-      this.getAllProducts();
-    });
-  }
+  constructor(private http: HttpClient, private dataService: DataService, private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     console.log('ProductsComponent: ngOnInit called. Initial product load...');
     this.getAllProducts();
+
+    this.routerSubscription = this.router.events.subscribe(event => {
+      console.log('Router event:', event);
+      if (event instanceof NavigationEnd) {
+        console.log('NavigationEnd detected, loading products...');
+        this.getAllProducts();
+      }
+    });
+
   }
 
   ngOnDestroy(): void {
-    this.routerSubscription?.unsubscribe(); // Unsubscribe to prevent memory leaks
+    this.routerSubscription?.unsubscribe(); 
   }
 
   getAllProducts(): void {
@@ -52,7 +53,8 @@ export class Products implements OnInit, OnDestroy { // Implemented OnDestroy
     this.dataService.getProducts().subscribe({
       next: (data: any[]) => {
         this.products = data;
-        this.applyFiltersAndSort(); // Apply filters/sort immediately after fetching
+        this.applyFiltersAndSort(); 
+        this.cdr.detectChanges();
         console.log("ProductsComponent: Fetched all products successfully:", this.products);
         if (this.products.length === 0) {
           this.showMessage("No products available.", 'info');
@@ -127,6 +129,7 @@ export class Products implements OnInit, OnDestroy { // Implemented OnDestroy
 
     if (!isLoggedIn || !userId) {
       this.showMessage("Please login first to add items to cart.", 'error');
+      alert('Please login first to add items to cart.');
       this.router.navigate(['/login']);
       return;
     }
@@ -140,15 +143,16 @@ export class Products implements OnInit, OnDestroy { // Implemented OnDestroy
     this.dataService.addToCart(cartItemDTO).subscribe({
       next: (response) => {
         this.showMessage(response, 'success');
+         alert('Product added to cart successfully!');
       },
       error: (err) => {
         console.error("ProductsComponent: Error adding to cart:", err);
         this.showMessage("Failed to add to cart: " + (err.error?.message || "Server error."), 'error');
+
       }
     });
   }
 
-  // Helper methods for messages
   showMessage(msg: string, type: 'success' | 'error' | 'info'): void {
     this.message = msg;
     this.messageType = type;

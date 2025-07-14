@@ -3,7 +3,6 @@ package com.example.ShopZone.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-// import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -44,7 +43,6 @@ public class Products {
     private String category;
 
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
-    // @JsonManagedReference(value = "product-cartitem")
     @JsonBackReference(value = "product-cartitem")
     private List<CartItem> cartItems;
 

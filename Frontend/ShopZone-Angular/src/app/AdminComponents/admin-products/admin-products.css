@@ -216,7 +216,7 @@
 }
 
 .product-admin-card .edit-button {
-  background-color: #007bff; /* Blue */
+  background-color: #007bff; 
   color: white;
 }
 
@@ -225,7 +225,7 @@
 }
 
 .product-admin-card .delete-button {
-  background-color: #dc3545; /* Red */
+  background-color: #dc3545; 
   color: white;
 }
 

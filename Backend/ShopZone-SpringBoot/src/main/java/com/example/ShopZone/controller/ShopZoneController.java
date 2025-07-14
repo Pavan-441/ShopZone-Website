@@ -28,7 +28,6 @@ import com.example.dto.CartItemUpdateDTO;
 import com.example.dto.ProductDTO;
 import com.example.dto.LoginDTO;
 import com.example.dto.RegisterDTO;
-// import com.example.dto.UserResponseDTO;
 
 import jakarta.validation.Valid;
 
@@ -72,21 +71,12 @@ public class ShopZoneController {
     }
 
     // Users API's
-    // @PostMapping("/users")
-    // public String postUserDetails(@RequestBody User user) {
-    // return service.postUsers(user);
-    // }
-
     @GetMapping("/users")
     public List<User> getAllUserDetails() {
         return service.getAllUsers();
     }
 
     @GetMapping("/users/{id}")
-    // public User getAllUserDetailsById(@PathVariable Long id){
-    // return service.getAllUsersById(id);
-    // }
-
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         User user = service.getAllUsersById(id);
         if (user == null) {
@@ -105,8 +95,8 @@ public class ShopZoneController {
         return service.deleteUserById(id);
     }
 
-    // Products table API's
 
+    // Products table API's
     @PostMapping("/products")
     public String postProductDetails(@RequestBody ProductDTO dto) {
         return service.postProducts(dto);
@@ -137,12 +127,6 @@ public class ShopZoneController {
     }
 
     // CRUD operations for Cart Table
-
-    // @PostMapping("/cart/{id}")
-    // public String postCartDetails(@PathVariable Long id, @RequestBody Cart cart) {
-    //     return service.postCart(id, cart);
-    // }
-
     @GetMapping("/cart")
     public List<Cart> getAllCartDetails() {
         return service.getAllCart();
@@ -168,12 +152,6 @@ public class ShopZoneController {
     }
 
     // CRUD operations for CartItem Table
-
-    // @PostMapping("/cartitems")
-    // public String postCartItems(@RequestBody CartItemDTO dto) {
-    // return service.postCartItem(dto);
-    // }
-
     @PostMapping("/cartitems")
     public ResponseEntity<?> postCartItems(@RequestBody CartItemDTO dto) {
         String result = service.postCartItem(dto);
@@ -190,17 +168,11 @@ public class ShopZoneController {
         return service.getAllCartItems();
     }
 
-    // @GetMapping("/cartitem/{id}")
-    // public CartItem getCartItemDetailsById(@PathVariable Long id) {
-    //     return service.getCartItemById(id);
-    // }
-
     @GetMapping("/cartitems/user/{userId}")
     public ResponseEntity<?> getCartItemsByUserId(@PathVariable Long userId) {
         List<CartItem> items = service.getCartItemsByUserId(userId);
         // if (items == null || items.isEmpty()) {
-        // return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No cart items found
-        // for user ID " + userId);
+        // return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No cart items found for user ID " + userId);
         // }
         return ResponseEntity.ok(items);
     }

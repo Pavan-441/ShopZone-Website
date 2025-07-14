@@ -25,7 +25,6 @@ import com.example.dto.LoginDTO;
 import com.example.dto.RegisterDTO;
 
 import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
 
 @Service
 @ControllerAdvice
@@ -171,16 +170,6 @@ public class ShopZoneService {
         }
     }
 
-    // Get all the products from the table
-    // public List<Products> getAllProducts() {
-    // try {
-    // return productrepo.findAll();
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // return null;
-    // }
-    // }
-
     public List<ProductDTO> getAllProducts() {
         try {
             return productrepo.findAll().stream().map(p -> {
@@ -296,55 +285,6 @@ public class ShopZoneService {
     // CartItem CRUD Operations
 
     // Create cart item
-    // public String postCartItem(CartItemDTO dto) {
-    // try {
-    // Cart cart = cartrepo.findById(dto.getCartId()).orElse(null);
-    // Products product = productrepo.findById(dto.getProductId()).orElse(null);
-
-    // if (cart == null) {
-    // return "Cart not found with id: " + dto.getCartId();
-    // }
-    // if (product == null) {
-    // return "Product not found with id: " + dto.getProductId();
-    // }
-
-    // CartItem existingCartItem = cart.getCartItems() != null
-    // ? cart.getCartItems().stream()
-    // .filter(item -> item.getProducts().getId().equals(dto.getProductId()))
-    // .findFirst()
-    // .orElse(null)
-    // : null;
-
-    // if (existingCartItem != null) {
-    // existingCartItem.setQuantity(existingCartItem.getQuantity() +
-    // dto.getQuantity());
-    // cartitemrepo.save(existingCartItem);
-    // return "CartItem quantity updated successfully";
-    // } else {
-    // CartItem cartItem = new CartItem();
-    // cartItem.setCart(cart);
-    // cartItem.setProducts(product);
-    // cartItem.setQuantity(dto.getQuantity());
-
-    // if (cart.getCartItems() == null) {
-    // cart.setCartItems(new ArrayList<>());
-    // }
-    // cart.getCartItems().add(cartItem);
-
-    // if (product.getCartItems() == null) {
-    // product.setCartItems(new ArrayList<>());
-    // }
-    // product.getCartItems().add(cartItem);
-
-    // cartitemrepo.save(cartItem);
-    // return "CartItem added successfully";
-    // }
-    // } catch (Exception e) {
-    // logger.error("Exception occurred in postCartItem()", e);
-    // return e.getMessage();
-    // }
-    // }
-
     public String postCartItem(CartItemDTO dto) {
         try {
             User user = userrepo.findById(dto.getUserId()).orElse(null);
@@ -405,16 +345,7 @@ public class ShopZoneService {
         }
     }
 
-    // Get cart items by id
-    // public CartItem getCartItemById(Long id) {
-    //     try {
-    //         return cartitemrepo.findById(id).orElse(null);
-    //     } catch (Exception e) {
-    //         logger.error("Exception occured in getCartItemById()", e);
-    //         return null;
-    //     }
-    // }
-    
+    // Get cart items by id    
     public List<CartItem> getCartItemsByUserId(Long userId) {
         User user = userrepo.findById(userId).orElse(null);
         if (user == null || user.getCart() == null) {
@@ -452,14 +383,4 @@ public class ShopZoneService {
         }
 
     }
-
-    // public List<CartItem> getCartItemsByUserId(Long userId) {
-    //     User user = userrepo.findById(userId).orElse(null);
-    //     if (user == null || user.getCart() == null) {
-    //         return new ArrayList<>();
-    //     }
-    //     Long cartId = user.getCart().getId();
-    //     return cartitemrepo.findByCartId(cartId);
-    // }
-
 }

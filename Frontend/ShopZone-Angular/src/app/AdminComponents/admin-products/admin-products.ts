@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -29,7 +29,7 @@ export class AdminProducts implements OnInit {
     category: ''
   };
 
-  constructor(private http: HttpClient, private router: Router, private dataService: DataService) {
+  constructor(private http: HttpClient, private router: Router, private dataService: DataService, private cdr: ChangeDetectorRef) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd && event.urlAfterRedirects === '/admin-products')
     ).subscribe(() => {
@@ -64,6 +64,7 @@ export class AdminProducts implements OnInit {
       next: (data: any[]) => {
         console.log("Fetched products successfully:", data);
         this.products = data;
+        this.cdr.detectChanges();
         this.clearMessage();
         if (this.products.length === 0) {
           this.showMessage("No products found in the database.", 'info');

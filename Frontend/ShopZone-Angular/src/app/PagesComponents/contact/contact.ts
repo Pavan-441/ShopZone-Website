@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+// import { RouterModule } from '@angular/router';
 import { Navbar } from '../../ReusableComponents/navbar/navbar';
 import { Footer } from '../../ReusableComponents/footer/footer';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -26,24 +26,20 @@ export class Contact {
 
   onSubmit(): void {
     this.clearMessage();
-    // Basic form validation
     if (!this.contactForm.name || !this.contactForm.email || !this.contactForm.subject || !this.contactForm.message) {
       this.showMessage('Please fill in all required fields.', 'error');
       return;
     }
 
-    // Simple email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.contactForm.email)) {
       this.showMessage('Please enter a valid email address.', 'error');
       return;
     }
 
-    // Simulate sending data (in a real app, you'd use HttpClient here)
     console.log('Contact form submitted:', this.contactForm);
     this.showMessage('Thank you for your message! We will get back to you soon.', 'success');
 
-    // Reset form
     this.contactForm = {
       name: '',
       email: '',
@@ -52,7 +48,6 @@ export class Contact {
     };
   }
 
-  // Helper methods for messages (reused)
   showMessage(msg: string, type: 'success' | 'error' | 'info'): void {
     this.message = msg;
     this.messageType = type;

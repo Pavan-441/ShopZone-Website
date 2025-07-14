@@ -1,21 +1,3 @@
-<!-- 
-
-<div class="products-container">
-  <input type="text" [(ngModel)]="searchText" placeholder="Search products..." class="search-bar" />
-
-  <div class="product-list">
-    <div class="product-card" *ngFor="let product of filteredProducts()">
-      <img [src]="product.imageUrl" alt="{{ product.name }}" />
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.description }}</p>
-      <strong>₹{{ product.price }}</strong><br><br>
-      <button (click)="addToCart(product)">Add to Cart</button>
-    </div>
-  </div>
-</div>
-
-<app-footer></app-footer> -->
-
 <app-navbar></app-navbar>
 <div class="products-page-container">
   <div *ngIf="message" [ngClass]="{'message': true, 'success-message': messageType === 'success', 'error-message': messageType === 'error', 'info-message': messageType === 'info'}">
@@ -41,32 +23,6 @@
   </div>
 
   <div class="main-content">
-    <!-- <aside class="filters-sidebar">
-      <h3>Filters</h3>
-      <div class="filter-group">
-        <h4>Categories</h4>
-        <div class="category-options">
-          <label>
-            <input type="radio" name="category" value="all" [(ngModel)]="selectedCategory" (change)="onCategoryChange()"> All
-          </label>
-          <label>
-            <input type="radio" name="category" value="drinks" [(ngModel)]="selectedCategory" (change)="onCategoryChange()"> Drinks
-          </label>
-          <label>
-            <input type="radio" name="category" value="soaps" [(ngModel)]="selectedCategory" (change)="onCategoryChange()"> Soaps
-          </label>
-          <label>
-            <input type="radio" name="category" value="liquids" [(ngModel)]="selectedCategory" (change)="onCategoryChange()"> Liquids
-          </label>
-          <label>
-            <input type="radio" name="category" value="powders" [(ngModel)]="selectedCategory" (change)="onCategoryChange()"> Powders
-          </label>
-      
-        </div>
-      </div>
-      
-    </aside> -->
-
     <div class="product-list-grid">
       <div class="product-card" *ngFor="let product of filteredProductsList">
         <div class="product-image-wrapper">

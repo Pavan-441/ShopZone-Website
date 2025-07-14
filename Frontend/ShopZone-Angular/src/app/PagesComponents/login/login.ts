@@ -26,7 +26,6 @@ export class Login {
     onSubmit(): void {
     const loginData = this.loginForm.value;
 
-    // Step 1: Hit /login API
     this.http.post('http://localhost:8080/login', loginData, { responseType: 'text' }).subscribe({
       next: (response: string) => {
         if (response === 'Login successful') {
@@ -57,31 +56,5 @@ export class Login {
     });
   }
 
-  // onSubmit(): void {
-  //   const loginData = this.loginForm.value;
 
-  //   this.http.post<any>('http://localhost:8080/login', loginData).subscribe({
-  //     next: (response) => {
-  //       if (response === 'Login successful') {
-  //         this.router.navigate(['/home']);
-  //       } else {
-  //         this.errorMessage = response;
-  //       }
-
-  //       if (response === 'Login successful') {
-  //         localStorage.setItem('isLoggedIn', 'true');
-  //         this.router.navigate(['/home']);
-  //       }
-  //       if(response === 'Login successful'){
-  //         alert("Login Successful");
-  //       }
-
-  //     },
-  //     error: (error) => {
-  //       this.errorMessage = 'Login failed. Try again.';
-  //       console.error("Login error:", error);
-  //     }
-  //   })
-
-  // }
 }

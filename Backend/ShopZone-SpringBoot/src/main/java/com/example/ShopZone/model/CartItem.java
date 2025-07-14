@@ -3,10 +3,7 @@ package com.example.ShopZone.model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-// import jakarta.persistence.Column;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-// import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -42,7 +39,6 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
-    // Jsonbackreference update
     @JsonManagedReference(value = "product-cartitem")
     private Products products;
     

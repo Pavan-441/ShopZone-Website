@@ -30,12 +30,12 @@ export class AdminProducts implements OnInit {
   };
 
   constructor(private http: HttpClient, private router: Router, private dataService: DataService, private cdr: ChangeDetectorRef) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd && event.urlAfterRedirects === '/admin-products')
-    ).subscribe(() => {
-      console.log('NavigationEnd event for /admin-products detected. Checking login and loading products...');
-      this.checkAdminLoginAndLoadProducts();
-    });
+    // this.router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd && event.urlAfterRedirects === '/admin-products')
+    // ).subscribe(() => {
+    //   console.log('NavigationEnd event for /admin-products detected. Checking login and loading products...');
+    //   this.checkAdminLoginAndLoadProducts();
+    // });
   }
 
   ngOnInit(): void {
@@ -87,6 +87,7 @@ export class AdminProducts implements OnInit {
 
     if (this.isEditing) {
       this.updateProduct();
+      // this.cdr.detectChanges();
     } else {
       this.addProduct();
     }

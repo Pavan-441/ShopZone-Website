@@ -200,22 +200,22 @@ public class ShopZoneService {
         }
     }
 
-    // Update the product by using id
-    public String updateProductById(Long id, Products UpdatedProduct) {
+    // Update the product by using id(admin)
+    public String updateProductById(Long id, ProductDTO dto) {
         try {
             return productrepo.findById(id).map(existingProduct -> {
-                existingProduct.setName(UpdatedProduct.getName());
-                existingProduct.setDescription(UpdatedProduct.getDescription());
-                existingProduct.setPrice(UpdatedProduct.getPrice());
-                existingProduct.setImageUrl(UpdatedProduct.getImageUrl());
-                existingProduct.setCategory(UpdatedProduct.getCategory());
+                existingProduct.setName(dto.getName());
+                existingProduct.setDescription(dto.getDescription());
+                existingProduct.setPrice(dto.getPrice());
+                existingProduct.setImageUrl(dto.getImageUrl());
+                existingProduct.setCategory(dto.getCategory());
 
                 productrepo.save(existingProduct);
                 return "Updated Successfully";
             }).orElse("Product with ID " + id + " is not found.");
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error occured";
+            return "Error occurred";
         }
     }
 
@@ -232,7 +232,7 @@ public class ShopZoneService {
     // Cart CRUD Operations
 
     // Get all carts from the table
-    
+
     public List<Cart> getAllCart() {
         try {
             return cartrepo.findAll();
@@ -345,7 +345,7 @@ public class ShopZoneService {
         }
     }
 
-    // Get cart items by id    
+    // Get cart items by id
     public List<CartItem> getCartItemsByUserId(Long userId) {
         User user = userrepo.findById(userId).orElse(null);
         if (user == null || user.getCart() == null) {

@@ -95,7 +95,6 @@ public class ShopZoneController {
         return service.deleteUserById(id);
     }
 
-
     // Products table API's
     @PostMapping("/products")
     public String postProductDetails(@RequestBody ProductDTO dto) {
@@ -117,8 +116,8 @@ public class ShopZoneController {
     }
 
     @PutMapping("/products/{id}")
-    public String updateProductDetailsById(@PathVariable Long id, @RequestBody Products product) {
-        return service.updateProductById(id, product);
+    public String updateProductDetailsById(@PathVariable Long id, @RequestBody ProductDTO dto) {
+        return service.updateProductById(id, dto);
     }
 
     @DeleteMapping("/products/{id}")
@@ -172,16 +171,17 @@ public class ShopZoneController {
     public ResponseEntity<?> getCartItemsByUserId(@PathVariable Long userId) {
         List<CartItem> items = service.getCartItemsByUserId(userId);
         // if (items == null || items.isEmpty()) {
-        // return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No cart items found for user ID " + userId);
+        // return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No cart items found
+        // for user ID " + userId);
         // }
         return ResponseEntity.ok(items);
     }
 
     @PutMapping("/cartitem/{id}")
     public String updateCartItemDetailsById(@PathVariable Long id, @RequestBody CartItemUpdateDTO dto) {
-        try{
-        return service.updateCartItemById(id, dto.getQuantity());
-        }catch(Exception e){
+        try {
+            return service.updateCartItemById(id, dto.getQuantity());
+        } catch (Exception e) {
             System.err.println("Error updating cart item: " + e.getMessage()); // Fallback to System.err
             return "Error updating cart item: " + e.getMessage();
         }
@@ -191,7 +191,5 @@ public class ShopZoneController {
     public String deleteCartItemDetailsById(@PathVariable Long id) {
         return service.deleteCartItemById(id);
     }
-
-    
 
 }
